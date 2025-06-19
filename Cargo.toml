@@ -2,5 +2,13 @@
 name = "zach_os"
 version = "0.1.0"
 edition = "2018"
+authors = ["Zacharie Côté <zacharie-cote@hotmail.ca>"]
 
 [dependencies]
+# Keep this empty or explicitly declare no_std-safe crates only
+
+[profile.dev]
+panic = "abort"        # disable unwinding in dev builds
+
+[profile.release]
+panic = "abort"        # disable unwinding in release builds
