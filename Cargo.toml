@@ -4,9 +4,17 @@ version = "0.1.0"
 edition = "2018"
 authors = ["Zacharie Côté <zacharie-cote@hotmail.ca>"]
 
+[[bin]]
+name = "zach_os"
+path = "src/main.rs"
+test = false
+doctest = false
+bench = false
+
 [dependencies]
 bootloader = "0.9"
 volatile = "0.2.6"
+spin = "0.10.0"
 
 [dependencies.lazy_static]
 version = "1.5.0"
