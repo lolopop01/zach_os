@@ -4,22 +4,37 @@ version = "0.1.0"
 edition = "2018"
 authors = ["Zacharie Côté <zacharie-cote@hotmail.ca>"]
 
-[[bin]]
-name = "zach_os"
-path = "src/main.rs"
-test = false
-doctest = false
-bench = false
+[package.metadata.bootimage]
+test-timeout = 300
+test-args = [
+    "-device", "isa-debug-exit,iobase=0xf4,iosize=0x04", "-serial", "stdio",
+    "-display", "none"
+]
+test-success-exit-code = 33         # (0x10 << 1) | 1
 
 [dependencies]
+# Compatible versions (don't update or everything breaks)
 bootloader = "0.9"
 volatile = "0.2.6"
+
+# Newest versions
 spin = "0.10.0"
+x86_64 = "0.15.2"
+uart_16550 = "0.3.2"
 
 [dependencies.lazy_static]
 version = "1.5.0"
 features = ["spin_no_std"]
 
+[profile.release]
+
 [profile.dev]
 
-[profile.release]
+[profile.test]
+
+
+[[test]]
+name = "should_panic"
+harness = false
+
+
