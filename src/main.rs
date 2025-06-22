@@ -11,10 +11,12 @@ use zach_os::println;
 pub extern "C" fn _start() -> ! {
     println!("Hello World{}", "!");
 
-    zach_os::init(); 
+    zach_os::init();
 
-    // invoke a breakpoint exception
-    x86_64::instructions::interrupts::int3(); 
+    // trigger a page fault
+    unsafe {
+        *(0xdeadbeef as *mut u8) = 42;
+    };
 
     // as before
     #[cfg(test)]
